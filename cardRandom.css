@@ -1,5 +1,11 @@
  body {
     background-color: #237819;
+    margin: 0;
+}
+
+nav {
+    height: 50px;
+    background-color: #091c03;
 }
 
 div {
