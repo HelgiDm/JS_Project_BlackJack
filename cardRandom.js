@@ -26,6 +26,7 @@ const cardRandom = {
     }
     return deck;
     },
+
     drawCard() {
         let yourCard = this.deck[Math.floor(Math.random() * this.deck.length)];
         this.deck.splice(this.deck.indexOf(yourCard), 1);
@@ -39,17 +40,28 @@ const cardRandom = {
     },
     score: [],
     sumPick() {
-//        for (i of yourPick) {
-//            if ()
-//            this.score.push(Object.values(i)[0]);
-//            console.log(Object.values(i)[0]);
+        for (i of yourPick) {
+//            console.log(Number(i.value));
+            if (Number(i.value) == "NaN") {
+                this.score.push(Number(i.value))
+                console.log(this.score)
+            }
+            else {console.log('ffff')}
+            }
 //        }
 //        if (this.score.includes('J') || this.score.includes( 'Q') || this.score.includes('K') || this.score.includes('A')) {console.log('pizdez')}
 //
 //        else {console.log('Norm')}
+    },
+    pickCard() {
+        let newCard = this.deck[Math.floor(Math.random() * this.deck.length)];
+        this.deck.splice(this.deck.indexOf(newCard), 1);
+        yourPick.push(newCard);
+        return newCard
     }
 }
 
+//Start-Game Button
 const startButton = document.getElementById('start-button');
 let yourPick = []
 startButton.addEventListener('click', () => {
@@ -60,15 +72,27 @@ startButton.addEventListener('click', () => {
 //        cardRandom.drawCard();
         cardRandom.vizual();
         console.log(yourPick,`current score: ${parseInt(yourPick)}`);
-
     }
     else {
-        alert('You fool?')
+        alert('Game is already started!')
     }
-
-
 });
 
+//Pick-Card Button
+const pickCard = document.getElementById('pick-card');
+pickCard.addEventListener('click', () => {
+    if (yourPick.length) {
+        const cardImg = document.createElement('img');
+        cardImg.src = cardRandom.pickCard().img;
+        document.querySelector('div').append(cardImg);
+        console.log(yourPick,`current score: ${parseInt(yourPick)}`)
+    }
+    else {
+        alert('You need to click "Click to start!" firstly')
+    }
+})
+
+//Reset Button
 const resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', () => {
     cardRandom['deck'] = [];
@@ -78,8 +102,6 @@ resetButton.addEventListener('click', () => {
     };
     yourPick = [];
 })
-
-
 
 
 
