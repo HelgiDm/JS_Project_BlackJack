@@ -39,20 +39,44 @@ const cardRandom = {
         document.querySelector('div').append(cardImg)
     },
     score: [],
-    sumPick() {
-        for (i of yourPick) {
-//            console.log(Number(i.value));
-            if (Number(i.value) == "NaN") {
-                this.score.push(Number(i.value))
-                console.log(this.score)
-            }
-            else {console.log('ffff')}
-            }
+//    sumPick() {
+//        for (i of yourPick) {
+//            console.log(i.value);
+//            if (isNaN(Number(i.value))) {
+//                if (Object.values(i).includes('J')) {this.score.push(2)}
+//                else if (Object.values(i).includes('Q')) {this.score.push(3)}
+//                else if (Object.values(i).includes('K')) {this.score.push(4)}
+//                else if (Object.values(i).includes('A')) {
+//                    if (Object.values(i).includes(11)) {
+//                        this.score.push(10)
+//                    }
+//                    else {
+//                        this.score.push(11)
+//                    }
+//                }
+//            }
+//            else {this.score.push(Number(i.value))}
 //        }
-//        if (this.score.includes('J') || this.score.includes( 'Q') || this.score.includes('K') || this.score.includes('A')) {console.log('pizdez')}
-//
-//        else {console.log('Norm')}
+//        return this.score
+//    },
+    sumPick(card) {
+            if (isNaN(Number(card.value))) {
+                if (Object.values(card).includes('J')) {this.score.push(2)}
+                else if (Object.values(card).includes('Q')) {this.score.push(3)}
+                else if (Object.values(card).includes('K')) {this.score.push(4)}
+                else if (Object.values(card).includes('A')) {
+                    if (Object.values(card).includes(11)) {
+                        this.score.push(10)
+                    }
+                    else {
+                        this.score.push(11)
+                    }
+                }
+            }
+            else {this.score.push(Number(card.value))}
+        return this.score
     },
+
     pickCard() {
         let newCard = this.deck[Math.floor(Math.random() * this.deck.length)];
         this.deck.splice(this.deck.indexOf(newCard), 1);
@@ -71,6 +95,9 @@ startButton.addEventListener('click', () => {
         cardRandom.vizual();
 //        cardRandom.drawCard();
         cardRandom.vizual();
+        for (i in yourPick) {
+            console.log(cardRandom.sumPick(i))
+        }
         console.log(yourPick,`current score: ${parseInt(yourPick)}`);
     }
     else {
