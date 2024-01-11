@@ -87,7 +87,7 @@ const cardRandom = {
 
 //Start-Game Button
 const startButton = document.getElementById('start-button');
-let yourPick = []
+let yourPick = [];
 startButton.addEventListener('click', () => {
     if (!yourPick.length) {
         cardRandom.makeDeck();
@@ -95,10 +95,11 @@ startButton.addEventListener('click', () => {
         cardRandom.vizual();
 //        cardRandom.drawCard();
         cardRandom.vizual();
-        for (i in yourPick) {
-            console.log(cardRandom.sumPick(i))
+        for (i of yourPick) {
+            cardRandom.sumPick(i)
         }
-        console.log(yourPick,`current score: ${parseInt(yourPick)}`);
+
+        console.log(yourPick,`current score: ${cardRandom.score.reduce((a, b) => {return a + b})}`);
     }
     else {
         alert('Game is already started!')
