@@ -4,13 +4,19 @@
 }
 
 nav {
-    height: 50px;
+    height: 70px;
     background-color: #091c03;
 }
 
-div {
+nav .score {
+    display: inline-block;
+    margin-left: 150px;
+    color: white;
+    font-size: 20px
+}
+
+.field {
     height: 300px;
-    width: 600px;
 }
 
 

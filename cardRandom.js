@@ -74,7 +74,8 @@ const cardRandom = {
                 }
             }
             else {this.score.push(Number(card.value))}
-        return this.score
+        let curScore = cardRandom.this.score.reduce((a, b) => {return a + b});
+        return curScore
     },
 
     pickCard() {
@@ -99,7 +100,8 @@ startButton.addEventListener('click', () => {
             cardRandom.sumPick(i)
         }
 
-        console.log(yourPick,`current score: ${cardRandom.score.reduce((a, b) => {return a + b})}`);
+//        let curScore = cardRandom.score.reduce((a, b) => {return a + b});
+        console.log(yourPick,`current score: ${curScore}`);
     }
     else {
         alert('Game is already started!')
@@ -113,7 +115,7 @@ pickCard.addEventListener('click', () => {
         const cardImg = document.createElement('img');
         cardImg.src = cardRandom.pickCard().img;
         document.querySelector('div').append(cardImg);
-        console.log(yourPick,`current score: ${parseInt(yourPick)}`)
+//        console.log(yourPick,`current score: ${parseInt(yourPick)}`)
     }
     else {
         alert('You need to click "Click to start!" firstly')
