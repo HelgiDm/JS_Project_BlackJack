@@ -13,6 +13,15 @@ nav .score {
     margin-left: 150px;
     color: white;
     font-size: 20px
+    background-color: rgba(0, 0, 0, .20);
+}
+
+#numb {
+    color: red;
+    margin-left: 20px;
+    background-color: rgba(0, 0, 0, .20);
+    width: 40px;
+    height: 40px;
 }
 
 .field {

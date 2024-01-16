@@ -61,21 +61,33 @@ const cardRandom = {
 //    },
     sumPick(card) {
             if (isNaN(Number(card.value))) {
-                if (Object.values(card).includes('J')) {this.score.push(2)}
-                else if (Object.values(card).includes('Q')) {this.score.push(3)}
-                else if (Object.values(card).includes('K')) {this.score.push(4)}
+                if (Object.values(card).includes('J')) {
+                this.score.push(2);
+                return 2
+                }
+                else if (Object.values(card).includes('Q')) {
+                this.score.push(3);
+                return 3
+                }
+                else if (Object.values(card).includes('K')) {
+                this.score.push(4);
+                return 4
+                }
                 else if (Object.values(card).includes('A')) {
                     if (Object.values(card).includes(11)) {
-                        this.score.push(10)
+                        this.score.push(10);
+                        return 10
                     }
                     else {
-                        this.score.push(11)
+                        this.score.push(11);
+                        return 11
                     }
                 }
             }
-            else {this.score.push(Number(card.value))}
-        let curScore = cardRandom.this.score.reduce((a, b) => {return a + b});
-        return curScore
+            else {
+            this.score.push(Number(card.value));
+            return Number(card.value)
+            }
     },
 
     pickCard() {
@@ -87,21 +99,21 @@ const cardRandom = {
 }
 
 //Start-Game Button
-const startButton = document.getElementById('start-button');
+let curScore = 0;
 let yourPick = [];
+const scoreNumb = document.getElementById('numb');
+const startButton = document.getElementById('start-button');
 startButton.addEventListener('click', () => {
     if (!yourPick.length) {
         cardRandom.makeDeck();
-//        cardRandom.drawCard();
         cardRandom.vizual();
-//        cardRandom.drawCard();
         cardRandom.vizual();
         for (i of yourPick) {
             cardRandom.sumPick(i)
         }
-
-//        let curScore = cardRandom.score.reduce((a, b) => {return a + b});
-        console.log(yourPick,`current score: ${curScore}`);
+        curScore = cardRandom.score.reduce((a, b) => {return a + b});
+        scoreNumb.innerText = curScore;
+//        console.log(yourPick,`current score: ${curScore}`);
     }
     else {
         alert('Game is already started!')
@@ -115,6 +127,7 @@ pickCard.addEventListener('click', () => {
         const cardImg = document.createElement('img');
         cardImg.src = cardRandom.pickCard().img;
         document.querySelector('div').append(cardImg);
+        scoreNumb.innerText = curScore + cardRandom.sumPick(yourPick[yourPick.length - 1])
 //        console.log(yourPick,`current score: ${parseInt(yourPick)}`)
     }
     else {
@@ -127,6 +140,7 @@ const resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', () => {
     cardRandom['deck'] = [];
     cardRandom['score'] = [];
+    scoreNumb.innerText = 0;
     for (j of yourPick) {
         document.querySelector('img').remove()
     };
