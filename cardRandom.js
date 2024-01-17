@@ -127,7 +127,8 @@ pickCard.addEventListener('click', () => {
         const cardImg = document.createElement('img');
         cardImg.src = cardRandom.pickCard().img;
         document.querySelector('div').append(cardImg);
-        scoreNumb.innerText = curScore + cardRandom.sumPick(yourPick[yourPick.length - 1])
+        curScore = curScore + cardRandom.sumPick(yourPick[yourPick.length - 1]);
+        scoreNumb.innerText = curScore
 //        console.log(yourPick,`current score: ${parseInt(yourPick)}`)
     }
     else {
