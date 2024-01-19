@@ -36,7 +36,7 @@ const cardRandom = {
     vizual() {
         const cardImg = document.createElement('img');
         cardImg.src = this.drawCard().img;
-        document.querySelector('div').append(cardImg)
+        document.querySelector('.field').append(cardImg)
     },
     score: [],
 //    sumPick() {
@@ -126,7 +126,7 @@ pickCard.addEventListener('click', () => {
     if (yourPick.length) {
         const cardImg = document.createElement('img');
         cardImg.src = cardRandom.pickCard().img;
-        document.querySelector('div').append(cardImg);
+        document.querySelector('.field').append(cardImg);
         curScore = curScore + cardRandom.sumPick(yourPick[yourPick.length - 1]);
         scoreNumb.innerText = curScore
 //        console.log(yourPick,`current score: ${parseInt(yourPick)}`)
