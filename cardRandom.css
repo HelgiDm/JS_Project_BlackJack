@@ -48,9 +48,16 @@ button {
     color: white;
 }
 
-#start-button, #reset {
-    color:
+#buttons {
+    /*display: flex;*/
+    justify-content: center;
+    position: absolute;
+    top: 24px;
+    left: 41px;
+}
 
+#buttons button {
+    margin-right: 7px;
 }
 
 
