@@ -1,5 +1,4 @@
  body {
-    width: 100vw;
     height: 100vh;
     background: linear-gradient(to bottom right, #237819, #13330c);
     margin: 0;
@@ -21,31 +20,34 @@
     border-image-slice: 1;*/
 }
 
-nav {
-    height: 70px;
-}
 
 nav .score {
     margin-left: 150px;
     width: 200px;
-    color: white;
+    color: #B39584;
     font-size: 20px;
-    background-color: rgba(0, 0, 0, .20);
+    background-color: #59884E0f;
+    border-radius: 15px;
     display: flex;
     /*align-items: center;*/
     justify-content: center;
     position: absolute;
     top: 4px;
-    left: 1032px;
-
-
+    left: 60vw;
 }
 
 button {
-    border-radius: 20px;
+    border-radius: 8px;
     font-size: 17px;
-    background-color: #b11313a1;
-    color: white;
+    background-color: #59884E0f;
+   /* background: linear-gradient(to bottom right, #b11313a1, #331A0C);*/
+    color: #B39584;
+}
+
+button:hover {
+    text-shadow:
+    0 0 0 white,
+    0 0 1em white;
 }
 
 #buttons {
@@ -62,23 +64,25 @@ button {
 
 
 #numb {
-    color: red;
+    color: #B39584;
     margin-left: 20px;
-    background-color: rgba(0, 0, 0, .20);
 }
 
 .field {
     height: 300px;
+    /*top: 35vh;
+    left: 30vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;*/
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(0px, 0%)
-
-  width: 80%;
-
+    transform: translate(-50%, -50%);
 }
 
 
 img {
-    width: 200px;
+    width: 12vw;
+    margin: 0.3vw;
 }
