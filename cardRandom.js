@@ -148,7 +148,45 @@ resetButton.addEventListener('click', () => {
     yourPick = [];
 })
 
-
+//Finish Button
+const finButton = document.querySelector('#fin');
+finButton.addEventListener('click', () => {
+    cardRandom.score = [];
+    cardRandom.sumPick(cardRandom.drawCard());
+    cardRandom.sumPick(cardRandom.drawCard());
+    let dlrScore = cardRandom.score.reduce((a, b) => {return a + b});
+    console.log(cardRandom.score);
+    console.log(dlrScore);
+    if (dlrScore >= 20) {
+        console.log('stop')
+   }
+   else if (dlrScore === 19) {
+        let chance = Math.floor(Math.random() * 9 + 1);
+        console.log(chance);
+        if (chance === 9) {
+            cardRandom.sumPick(cardRandom.drawCard())
+            console.log('stop')
+        }
+   }
+   else if (dlrScore === 18) {
+       let chance = Math.floor(Math.random() * 5 + 1);
+       console.log(chance);
+       if (chance === 5) {
+            cardRandom.sumPick(cardRandom.drawCard())
+            console.log('stop')
+   }
+   }
+   else if (dlrScore === 17) {
+       let chance = Math.floor(Math.random() * 3 + 1);
+       console.log(chance);
+       if (chance === 3) {
+            cardRandom.sumPick(cardRandom.drawCard())
+            console.log('stop')
+   }
+   }
+   console.log(cardRandom.score);
+   console.log(dlrScore)
+})
 
 
 
