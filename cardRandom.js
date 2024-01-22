@@ -39,26 +39,6 @@ const cardRandom = {
         document.querySelector('.field').append(cardImg)
     },
     score: [],
-//    sumPick() {
-//        for (i of yourPick) {
-//            console.log(i.value);
-//            if (isNaN(Number(i.value))) {
-//                if (Object.values(i).includes('J')) {this.score.push(2)}
-//                else if (Object.values(i).includes('Q')) {this.score.push(3)}
-//                else if (Object.values(i).includes('K')) {this.score.push(4)}
-//                else if (Object.values(i).includes('A')) {
-//                    if (Object.values(i).includes(11)) {
-//                        this.score.push(10)
-//                    }
-//                    else {
-//                        this.score.push(11)
-//                    }
-//                }
-//            }
-//            else {this.score.push(Number(i.value))}
-//        }
-//        return this.score
-//    },
     sumPick(card) {
             if (isNaN(Number(card.value))) {
                 if (Object.values(card).includes('J')) {
@@ -95,17 +75,56 @@ const cardRandom = {
         this.deck.splice(this.deck.indexOf(newCard), 1);
         yourPick.push(newCard);
         return newCard
-    }
+    },
+
+    dealerScore() {
+        let dlrScore = this.score.reduce((a, b) => {return a + b});
+        return dlrScore;
+    },
+
+    dealerTurn() {
+        let active = true;
+        if (this.dealerScore() >= 20) {
+            active = false
+        }
+        else if (this.dealerScore() === 19) {
+            let chance = Math.floor(Math.random() * 9 + 1);
+            console.log(chance);
+            if (chance === 9) {
+                this.sumPick(this.drawCard())
+                active = false
+            }
+            else {active = false}
+        }
+        else if (this.dealerScore() === 18) {
+            let chance = Math.floor(Math.random() * 5 + 1);
+            console.log(chance);
+            if (chance === 5) {
+                this.sumPick(this.drawCard())
+                active = false
+            }
+            else {active = false}
+        }
+        else if (this.dealerScore() === 17 || this.dealerScore() === 16) {
+            let chance = Math.floor(Math.random() * 3 + 1);
+            console.log(chance);
+            if (chance === 3) {
+                this.sumPick(this.drawCard());
+                active = false
+            }
+            else {active = false}
+        }
+        else {
+            this.sumPick(this.drawCard());
+        }
+        return active
+        }
+
 }
 
 
-//dlrTurn() {
-//
-//
-//
-//
-//
-//}
+
+
 
 //Start-Game Button
 let curScore = 0;
@@ -163,45 +182,15 @@ finButton.addEventListener('click', () => {
     cardRandom.score = [];
     cardRandom.sumPick(cardRandom.drawCard());
     cardRandom.sumPick(cardRandom.drawCard());
-    function dealerScore () {
-        let dlrScore = cardRandom.score.reduce((a, b) => {return a + b});
-        return dlrScore;
-        };
     console.log(cardRandom.score);
-    console.log(dealerScore());
-    if (dealerScore() >= 20) {
-        console.log('stop')
-   }
-   else if (dealerScore() === 19) {
-        let chance = Math.floor(Math.random() * 9 + 1);
-        console.log(chance);
-        if (chance === 9) {
-            cardRandom.sumPick(cardRandom.drawCard())
-            console.log('stop')
-        }
-   }
-   else if (dealerScore() === 18) {
-       let chance = Math.floor(Math.random() * 5 + 1);
-       console.log(chance);
-       if (chance === 5) {
-            cardRandom.sumPick(cardRandom.drawCard())
-            console.log('stop')
-   }
-   }
-   else if (dealerScore() === 17 ||  dealerScore() === 16) {
-       let chance = Math.floor(Math.random() * 3 + 1);
-       console.log(chance);
-       if (chance === 3) {
-            cardRandom.sumPick(cardRandom.drawCard());
-            console.log('stop')
-   }
-   }
-   else {
-       cardRandom.sumPick(cardRandom.drawCard());
-   }
+    console.log(cardRandom.dealerScore());
+    while (cardRandom.dealerTurn() === true) {
+        cardRandom.dealerTurn()
+    }
+    console.log(cardRandom.score);
+    console.log(cardRandom.dealerScore());
 
-   console.log(cardRandom.score);
-   console.log(dealerScore())
+
 })
 
 
