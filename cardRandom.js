@@ -74,7 +74,7 @@ const cardRandom = {
                 return 4
                 }
                 else if (Object.values(card).includes('A')) {
-                    if (Object.values(card).includes(11)) {
+                    if (this.score.includes(11)) {
                         this.score.push(10);
                         return 10
                     }
@@ -97,6 +97,15 @@ const cardRandom = {
         return newCard
     }
 }
+
+
+//dlrTurn() {
+//
+//
+//
+//
+//
+//}
 
 //Start-Game Button
 let curScore = 0;
@@ -154,13 +163,16 @@ finButton.addEventListener('click', () => {
     cardRandom.score = [];
     cardRandom.sumPick(cardRandom.drawCard());
     cardRandom.sumPick(cardRandom.drawCard());
-    let dlrScore = cardRandom.score.reduce((a, b) => {return a + b});
+    function dealerScore () {
+        let dlrScore = cardRandom.score.reduce((a, b) => {return a + b});
+        return dlrScore;
+        };
     console.log(cardRandom.score);
-    console.log(dlrScore);
-    if (dlrScore >= 20) {
+    console.log(dealerScore());
+    if (dealerScore() >= 20) {
         console.log('stop')
    }
-   else if (dlrScore === 19) {
+   else if (dealerScore() === 19) {
         let chance = Math.floor(Math.random() * 9 + 1);
         console.log(chance);
         if (chance === 9) {
@@ -168,7 +180,7 @@ finButton.addEventListener('click', () => {
             console.log('stop')
         }
    }
-   else if (dlrScore === 18) {
+   else if (dealerScore() === 18) {
        let chance = Math.floor(Math.random() * 5 + 1);
        console.log(chance);
        if (chance === 5) {
@@ -176,16 +188,20 @@ finButton.addEventListener('click', () => {
             console.log('stop')
    }
    }
-   else if (dlrScore === 17) {
+   else if (dealerScore() === 17 ||  dealerScore() === 16) {
        let chance = Math.floor(Math.random() * 3 + 1);
        console.log(chance);
        if (chance === 3) {
-            cardRandom.sumPick(cardRandom.drawCard())
+            cardRandom.sumPick(cardRandom.drawCard());
             console.log('stop')
    }
    }
+   else {
+       cardRandom.sumPick(cardRandom.drawCard());
+   }
+
    console.log(cardRandom.score);
-   console.log(dlrScore)
+   console.log(dealerScore())
 })
 
 
