@@ -39,24 +39,14 @@ const cardRandom = {
         document.querySelector('.field').append(cardImg);
     },
     vizualCardBack() {
-        if (this.deck.length !== 0) {
-            for (card of this.deck) {
-                const cardBack = document.createElement('img');
-                cardBack.src = 'images/cardBack.png';
-                document.querySelector('.card-back').append(cardBack)
-            }
-        }
-        else {
-            let n = 0;
-            while (n <= 36) {
-                const cardBack = document.createElement('img');
-                cardBack.src = 'images/cardBack.png';
-                cardBack.style.top = `${15 - n * 0.05}vh`;
-                cardBack.style.left = `${10 - n * 0.05}vw`;
-
-                document.querySelector('.card-back').append(cardBack);
-                n += 1;
-            }
+        let n = 0;
+        while (n <= 36) {
+            const cardBack = document.createElement('img');
+            cardBack.src = 'images/cardBack.png';
+            cardBack.style.top = `${10 - n * 0.05}vh`;
+            cardBack.style.left = `${6 - n * 0.05}vw`;
+            document.querySelector('.card-back').append(cardBack);
+            n += 1;
         }
     },
     score: [],
@@ -161,6 +151,9 @@ startButton.addEventListener('click', () => {
         }
         curScore = cardRandom.score.reduce((a, b) => {return a + b});
         scoreNumb.innerText = curScore;
+        document.querySelector('.card-back').lastElementChild.remove();
+        document.querySelector('.card-back').lastElementChild.remove();
+
 //        console.log(yourPick,`current score: ${curScore}`);
     }
     else {
@@ -176,7 +169,8 @@ pickCard.addEventListener('click', () => {
         cardImg.src = cardRandom.pickCard().img;
         document.querySelector('.field').append(cardImg);
         curScore = curScore + cardRandom.sumPick(yourPick[yourPick.length - 1]);
-        scoreNumb.innerText = curScore
+        scoreNumb.innerText = curScore;
+        document.querySelector('.card-back').lastElementChild.remove();
 //        console.log(yourPick,`current score: ${parseInt(yourPick)}`)
     }
     else {
@@ -188,6 +182,7 @@ pickCard.addEventListener('click', () => {
 const resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', () => {
     cardRandom['deck'] = [];
+    cardRandom.vizualCardBack();
     cardRandom['score'] = [];
     scoreNumb.innerText = 0;
     for (j of yourPick) {
@@ -201,16 +196,17 @@ const finButton = document.querySelector('#fin');
 finButton.addEventListener('click', () => {
     cardRandom.score = [];
     cardRandom.sumPick(cardRandom.drawCard());
+    document.querySelector('.card-back').lastElementChild.remove();
     cardRandom.sumPick(cardRandom.drawCard());
+    document.querySelector('.card-back').lastElementChild.remove();
     console.log(cardRandom.score);
     console.log(cardRandom.dealerScore());
     while (cardRandom.dealerTurn() === true) {
         cardRandom.dealerTurn()
+        document.querySelector('.card-back').lastElementChild.remove();
     }
     console.log(cardRandom.score);
     console.log(cardRandom.dealerScore());
-
-
 })
 
 
