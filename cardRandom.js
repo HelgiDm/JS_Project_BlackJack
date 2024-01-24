@@ -182,6 +182,7 @@ pickCard.addEventListener('click', () => {
 const resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', () => {
     cardRandom['deck'] = [];
+    document.querySelector('.card-back').innerHTML = '';
     cardRandom.vizualCardBack();
     cardRandom['score'] = [];
     scoreNumb.innerText = 0;
@@ -189,6 +190,7 @@ resetButton.addEventListener('click', () => {
         document.querySelector('img').remove()
     };
     yourPick = [];
+
 })
 
 //Finish Button
