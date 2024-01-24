@@ -87,6 +87,10 @@ img {
     margin: 0.3vw;
 }
 
+.card-back {
+    filter: drop-shadow(10px 10px 8px #213921);
+}
+
 .card-back img {
     position: absolute;
 }
