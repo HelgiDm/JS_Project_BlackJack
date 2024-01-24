@@ -86,3 +86,7 @@ img {
     width: 12vw;
     margin: 0.3vw;
 }
+
+.card-back img {
+    position: absolute;
+}

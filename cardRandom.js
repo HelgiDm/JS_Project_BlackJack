@@ -36,7 +36,28 @@ const cardRandom = {
     vizual() {
         const cardImg = document.createElement('img');
         cardImg.src = this.drawCard().img;
-        document.querySelector('.field').append(cardImg)
+        document.querySelector('.field').append(cardImg);
+    },
+    vizualCardBack() {
+        if (this.deck.length !== 0) {
+            for (card of this.deck) {
+                const cardBack = document.createElement('img');
+                cardBack.src = 'images/cardBack.png';
+                document.querySelector('.card-back').append(cardBack)
+            }
+        }
+        else {
+            let n = 0;
+            while (n <= 36) {
+                const cardBack = document.createElement('img');
+                cardBack.src = 'images/cardBack.png';
+                cardBack.style.top = `${15 - n * 0.05}vh`;
+                cardBack.style.left = `${10 - n * 0.05}vw`;
+
+                document.querySelector('.card-back').append(cardBack);
+                n += 1;
+            }
+        }
     },
     score: [],
     sumPick(card) {
@@ -122,9 +143,8 @@ const cardRandom = {
 
 }
 
-
-
-
+// Making cards deck with card back picture
+cardRandom.vizualCardBack()
 
 //Start-Game Button
 let curScore = 0;
