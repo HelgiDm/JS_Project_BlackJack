@@ -69,21 +69,21 @@ button:hover {
 }
 
 .field {
-    height: 300px;
-    /*top: 35vh;
-    left: 30vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;*/
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 85vh;
+    left: 50vw;
     transform: translate(-50%, -50%);
 }
 
+.dlr-field {
+    position: absolute;
+    top: 20vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
 
 img {
-    width: 12vw;
+    width: 7vw;
     margin: 0.3vw;
 }
 

@@ -43,11 +43,16 @@ const cardRandom = {
         while (n <= 36) {
             const cardBack = document.createElement('img');
             cardBack.src = 'images/cardBack.png';
-            cardBack.style.top = `${10 - n * 0.05}vh`;
+            cardBack.style.top = `${20 - n * 0.05}vh`;
             cardBack.style.left = `${6 - n * 0.05}vw`;
             document.querySelector('.card-back').append(cardBack);
             n += 1;
         }
+    },
+    vizualDlr() {
+        dlrBack = document.createElement('img');
+        dlrBack.src = 'images/cardBack.png';
+        document.querySelector('.dlr-field').append(dlrBack);
     },
     score: [],
     sumPick(card) {
@@ -129,7 +134,17 @@ const cardRandom = {
             this.sumPick(this.drawCard());
         }
         return active
-        }
+        },
+
+    result() {
+        if (curScore === 21) {alert('You win!')}
+        else if ((curScore < 21 || curScore > 21) && this.dealerScore() === 21) {alert('You lose!')}
+        else if (curScore < 21 && curScore > this.dealerScore()) {alert('You win!')}
+        else if (this.dealerScore() < 21 && curScore < this.dealerScore()) {alert('You lose!')}
+        else if (curScore > 21 && this.dealerScore() < 21) {alert('You lose!')}
+        else if (curScore < 21 && this.dealerScore() > 21) {alert('You win!')}
+        else {alert('You win!')}
+    }
 
 }
 
@@ -178,6 +193,21 @@ pickCard.addEventListener('click', () => {
     }
 })
 
+// The same with clicking on the card deck
+document.querySelector('.card-back').addEventListener('click', () => {
+    if (yourPick.length) {
+        const cardImg = document.createElement('img');
+        cardImg.src = cardRandom.pickCard().img;
+        document.querySelector('.field').append(cardImg);
+        curScore = curScore + cardRandom.sumPick(yourPick[yourPick.length - 1]);
+        scoreNumb.innerText = curScore;
+        document.querySelector('.card-back').lastElementChild.remove();
+    }
+    else {
+        alert('You need to click "Click to start!" firstly')
+    }
+})
+
 //Reset Button
 const resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', () => {
@@ -186,9 +216,8 @@ resetButton.addEventListener('click', () => {
     cardRandom.vizualCardBack();
     cardRandom['score'] = [];
     scoreNumb.innerText = 0;
-    for (j of yourPick) {
-        document.querySelector('img').remove()
-    };
+    document.querySelector('.field').innerHTML = '';
+    document.querySelector('.dlr-field').innerHTML = '';
     yourPick = [];
 
 })
@@ -197,18 +226,33 @@ resetButton.addEventListener('click', () => {
 const finButton = document.querySelector('#fin');
 finButton.addEventListener('click', () => {
     cardRandom.score = [];
+    yourPick = [];
     cardRandom.sumPick(cardRandom.drawCard());
     document.querySelector('.card-back').lastElementChild.remove();
+    cardRandom.vizualDlr();
     cardRandom.sumPick(cardRandom.drawCard());
     document.querySelector('.card-back').lastElementChild.remove();
+    cardRandom.vizualDlr();
     console.log(cardRandom.score);
     console.log(cardRandom.dealerScore());
     while (cardRandom.dealerTurn() === true) {
-        cardRandom.dealerTurn()
+        cardRandom.dealerTurn();
         document.querySelector('.card-back').lastElementChild.remove();
+        cardRandom.vizualDlr();
     }
+
     console.log(cardRandom.score);
     console.log(cardRandom.dealerScore());
+    setTimeout(() => {
+        document.querySelector('.dlr-field').innerHTML = ''
+            for (card of yourPick) {
+                let dlrImg = document.createElement('img');
+                dlrImg.src = card.img;
+                document.querySelector('.dlr-field').append(dlrImg);
+            };
+        setTimeout(() => {cardRandom.result()}, '2000');
+    }, '2000')
+
 })
 
 
