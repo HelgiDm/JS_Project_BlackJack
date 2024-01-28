@@ -240,7 +240,7 @@ finButton.addEventListener('click', () => {
         document.querySelector('.card-back').lastElementChild.remove();
         cardRandom.vizualDlr();
     }
-
+    document.querySelector('#dlr-numb').innerText = cardRandom.dealerScore()
     console.log(cardRandom.score);
     console.log(cardRandom.dealerScore());
     setTimeout(() => {
