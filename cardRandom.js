@@ -179,7 +179,10 @@ startButton.addEventListener('click', () => {
 //Pick-Card Button
 const pickCard = document.getElementById('pick-card');
 pickCard.addEventListener('click', () => {
-    if (yourPick.length) {
+    if (document.querySelector('#dlr-numb').innerText !== '0') {
+        alert("You've already made your turn")
+    }
+    else if (yourPick.length) {
         const cardImg = document.createElement('img');
         cardImg.src = cardRandom.pickCard().img;
         document.querySelector('.field').append(cardImg);
@@ -204,7 +207,7 @@ document.querySelector('.card-back').addEventListener('click', () => {
         document.querySelector('.card-back').lastElementChild.remove();
     }
     else {
-        alert('You need to click "Click to start!" firstly')
+        alert('You need to click "Click to start!" first')
     }
 })
 
@@ -216,6 +219,7 @@ resetButton.addEventListener('click', () => {
     cardRandom.vizualCardBack();
     cardRandom['score'] = [];
     scoreNumb.innerText = 0;
+    document.querySelector('#dlr-numb').innerText = '0';
     document.querySelector('.field').innerHTML = '';
     document.querySelector('.dlr-field').innerHTML = '';
     yourPick = [];
@@ -225,34 +229,40 @@ resetButton.addEventListener('click', () => {
 //Finish Button
 const finButton = document.querySelector('#fin');
 finButton.addEventListener('click', () => {
-    cardRandom.score = [];
-    yourPick = [];
-    cardRandom.sumPick(cardRandom.drawCard());
-    document.querySelector('.card-back').lastElementChild.remove();
-    cardRandom.vizualDlr();
-    cardRandom.sumPick(cardRandom.drawCard());
-    document.querySelector('.card-back').lastElementChild.remove();
-    cardRandom.vizualDlr();
-    console.log(cardRandom.score);
-    console.log(cardRandom.dealerScore());
-    while (cardRandom.dealerTurn() === true) {
-        cardRandom.dealerTurn();
+    if (!yourPick.length) {
+        alert('You need to click "Click to start!" first')
+    }
+
+    else if (document.querySelector('#dlr-numb').innerText === '0') {
+        cardRandom.score = [];
+        yourPick = [];
+        cardRandom.sumPick(cardRandom.drawCard());
         document.querySelector('.card-back').lastElementChild.remove();
         cardRandom.vizualDlr();
+        cardRandom.sumPick(cardRandom.drawCard());
+        document.querySelector('.card-back').lastElementChild.remove();
+        cardRandom.vizualDlr();
+        console.log(cardRandom.score);
+        console.log(cardRandom.dealerScore());
+        while (cardRandom.dealerTurn() === true) {
+            cardRandom.dealerTurn();
+            document.querySelector('.card-back').lastElementChild.remove();
+            cardRandom.vizualDlr();
+        }
+        document.querySelector('#dlr-numb').innerText = cardRandom.dealerScore()
+        console.log(cardRandom.score);
+        console.log(cardRandom.dealerScore());
+        setTimeout(() => {
+            document.querySelector('.dlr-field').innerHTML = '';
+                for (card of yourPick) {
+                    let dlrImg = document.createElement('img');
+                    dlrImg.src = card.img;
+                    document.querySelector('.dlr-field').append(dlrImg);
+                };
+            setTimeout(() => {cardRandom.result()}, '2000');
+        }, '2000')
     }
-    document.querySelector('#dlr-numb').innerText = cardRandom.dealerScore()
-    console.log(cardRandom.score);
-    console.log(cardRandom.dealerScore());
-    setTimeout(() => {
-        document.querySelector('.dlr-field').innerHTML = ''
-            for (card of yourPick) {
-                let dlrImg = document.createElement('img');
-                dlrImg.src = card.img;
-                document.querySelector('.dlr-field').append(dlrImg);
-            };
-        setTimeout(() => {cardRandom.result()}, '2000');
-    }, '2000')
-
+    else {alert('Dealer has already made a turn')}
 })
 
 
